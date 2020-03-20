@@ -1,0 +1,409 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css");
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 2.2vh;
+  background: #E0E0E0;
+}
+
+@media screen and (min-height: 720px) and (min-width: 812px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+@media screen and (min-height: 850px) and (min-width: 812px) {
+  html {
+    font-size: 18px;
+  }
+}
+
+html, body, main, section {
+  height: 100%;
+}
+
+h1, h2, h3, p {
+  margin: 0;
+}
+
+.btn {
+  -webkit-appearance: none;
+  border: none;
+  background: #FFFFFF;
+  color: #000000;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: bold;
+  padding: 1rem 2rem;
+  width: 100%;
+  border: 0.2em solid #FFFFFF;
+  outline: none;
+  cursor: pointer;
+  border-radius: .3em;
+  -webkit-transition: all .2s ease;
+  transition: all .2s ease;
+}
+
+.btn:hover, .btn:focus {
+  background: #000000;
+  color: #FFFFFF;
+}
+
+.btn.btn-small {
+  width: auto;
+}
+
+.btn.btn-alt {
+  background: #000000;
+  color: #FFFFFF;
+  border-color: #000000;
+}
+
+.btn.btn-alt:hover, .btn.btn-alt:focus {
+  background: #FFFFFF;
+  color: #000000;
+  border-color: #000000;
+}
+
+a {
+  color: #92DE17;
+}
+
+.bounceInUp {
+  -webkit-animation-duration: .75s;
+          animation-duration: .75s;
+}
+
+.fadeInUp, .zoomIn {
+  -webkit-animation-duration: .4s;
+          animation-duration: .4s;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(224, 224, 224, 0.75);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.overlay article {
+  background: #FFFFFF;
+  color: #000000;
+  width: 90%;
+  max-width: 600px;
+  padding: 2rem;
+  border-radius: .3em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.overlay article h2 {
+  margin-bottom: 1rem;
+}
+
+.overlay article p {
+  line-height: 1.5;
+  margin-bottom: 2rem;
+}
+
+.overlay article p span {
+  color: #74b012;
+  font-weight: bold;
+}
+
+.wrapper {
+  height: 100%;
+  width: 100%;
+  max-width: 812px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.wrapper article {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  margin-top: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.card {
+  display: inline-block;
+  width: 11em;
+  height: 15em;
+  background: #FFFFFF;
+  font-weight: bold;
+  white-space: normal;
+  border-radius: .4em;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  border: 2px solid #FFFFFF;
+  -webkit-transition: all .2s ease;
+  transition: all .2s ease;
+}
+
+.card > span, .card > button {
+  display: block;
+  height: 100%;
+  width: 100%;
+  padding: 1em;
+  cursor: inherit;
+  position: relative;
+}
+
+.card > span span, .card > button span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: inherit;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  bottom: 1.2rem;
+  left: 1rem;
+  font-size: 0.5em;
+  width: .7em;
+  height: 1em;
+  background: #92DE17;
+  border-radius: .1em;
+  -webkit-transform: rotate(-10deg);
+          transform: rotate(-10deg);
+}
+
+.card::after {
+  content: "Quiz Against Humanity";
+  position: absolute;
+  bottom: 1.2rem;
+  left: calc(1rem + 1.2em);
+  font-size: .5em;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  pointer-events: none;
+}
+
+.card.card-question {
+  margin: 0 auto;
+  background: #000000;
+  color: #FFFFFF;
+  cursor: default;
+  font-size: 1.1rem;
+  border-color: #000000;
+}
+
+@media (hover: hover) {
+  .card:not(.card-question):focus-within {
+    border-color: #000000;
+  }
+  .card:not(.card-question):hover {
+    font-size: 1.05em;
+  }
+}
+
+.quiz {
+  background: #E0E0E0;
+  color: #000000;
+}
+
+.quiz header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.quiz header > div .number {
+  font-size: 1.8rem;
+  font-weight: 900;
+}
+
+.quiz header > div .number span {
+  font-size: 0.7em;
+}
+
+.quiz header > div:last-of-type {
+  text-align: right;
+}
+
+.quiz ul {
+  list-style: none;
+  margin: 0 -2rem -2rem;
+  padding: 0 2rem 2rem;
+  white-space: nowrap;
+  width: calc(100% + 4rem);
+  overflow-y: hidden;
+  overflow-x: auto;
+  font-size: 0.9rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.quiz ul li {
+  margin-right: .75rem;
+}
+
+.quiz ul li button {
+  -webkit-appearance: none;
+  background: none;
+  border: none;
+  outline: none;
+  font-weight: inherit;
+  text-align: inherit;
+}
+
+.quiz ul li:last-of-type {
+  margin-right: 0;
+}
+
+@media screen and (min-width: 812px) {
+  .quiz article {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .quiz ul {
+    -webkit-box-flex: .7;
+        -ms-flex: .7;
+            flex: .7;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    margin-bottom: 0;
+    padding: 2rem 0;
+  }
+  .quiz ul li {
+    margin: 0 0.5rem;
+  }
+}
+
+.intro {
+  background: #000000;
+  color: #FFFFFF;
+  padding: 1rem 0;
+}
+
+.intro h1 {
+  font-size: 2.5rem;
+}
+
+.intro h1, .intro .subtitle {
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+
+.intro h1 span, .intro .subtitle span {
+  display: block;
+}
+
+.intro p {
+  line-height: 1.5;
+}
+
+.results {
+  background: #000000;
+  color: #FFFFFF;
+  padding: 1rem 0;
+}
+
+.results article {
+  margin-top: 2rem;
+}
+
+.results article div {
+  text-align: center;
+}
+
+.results h1 {
+  font-size: 2.5rem;
+}
+
+.results h1, .results .subtitle {
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+
+.results h1 span, .results .subtitle span {
+  display: block;
+}
+
+.results p {
+  line-height: 1.5;
+}
+
+.results .description {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 400px;
+}
+
+.results .score {
+  margin: 0 0 .5rem;
+  font-size: 5rem;
+  font-weight: 900;
+}
+
+.results .score span {
+  font-size: 0.5em;
+  font-weight: normal;
+}
+
+.results footer {
+  margin-top: 3rem;
+  text-align: center;
+  font-size: 0.8rem;
+}
+/*# sourceMappingURL=index.css.map */
