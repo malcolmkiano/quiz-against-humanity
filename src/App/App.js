@@ -15,16 +15,25 @@ const QuizScreen = animate(QS);
 const Overlay = animate(OV);
 const ResultScreen = animate(RS);
 
+function shuffle(array) {
+  let array_copy = [...array];
+  for (let i = array_copy.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    [array_copy[i], array_copy[j]] = [array_copy[j], array_copy[i]];
+  }
+  return array_copy;
+}
+
 class App extends React.Component {
   constructor(){
     super();
     this.state = {
-      quizStarted: true,
+      quizStarted: false,
       questionNumber: 0,
       selectedAnswer: null,
       score: 0,
 
-      questions: data,
+      questions: shuffle(data),
 
       demoCompleted: false,
       startingOver: false,
@@ -65,10 +74,13 @@ class App extends React.Component {
 
   handlePlayAgain = () => {
     this.setState({
-      score: 0,
+      quizStarted: false,
       questionNumber: 0,
       selectedAnswer: null,
-      quizStarted: false,
+      score: 0,
+
+      questions: shuffle(data),
+
       startingOver: true
     })
   }
