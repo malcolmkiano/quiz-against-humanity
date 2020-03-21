@@ -19,12 +19,14 @@ class App extends React.Component {
   constructor(){
     super();
     this.state = {
-      quizStarted: false,
+      quizStarted: true,
       questionNumber: 0,
       selectedAnswer: null,
       score: 0,
 
       questions: data,
+
+      demoCompleted: false,
       startingOver: false,
       
       appVersion: '1.0.0'
@@ -49,6 +51,10 @@ class App extends React.Component {
     }
   }
 
+  handleDemoCompleted = () => {
+    this.setState({ demoCompleted: true })
+  }
+
   handleClose = () => {
     const {questionNumber} = this.state;
     this.setState({
@@ -70,7 +76,8 @@ class App extends React.Component {
   render() {
     const contextValue = {
       ...this.state,
-      onAnswer: this.handleAnswer
+      onAnswer: this.handleAnswer,
+      onDemoCompleted: this.handleDemoCompleted
     };
 
     const {quizStarted, questionNumber, questions, selectedAnswer, startingOver} = this.state;

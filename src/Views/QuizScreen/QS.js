@@ -44,10 +44,39 @@ class QuizScreen extends React.Component {
             this.setState({
               ...animations(true, true),
               q: this.props.q
-            }, () => this.list.scrollLeft = 0)
+            }, () => this.refs.list.scrollLeft = 0)
           }, 750);
         }
       });
+    }
+  }
+
+  componentDidMount() {
+    if (!this.context.demoCompleted) {
+      const list = this.refs.list;
+      let position = 0;
+      let interval = 10;
+      let reverse = false;
+      setTimeout(() => {
+        let animation = setInterval(() => {
+          list.scrollLeft = position;
+          if (reverse === false) {
+            if (position < list.scrollWidth) {
+              position += interval;
+            } else {
+              reverse = true;
+            }
+          } else {
+            if (position > 0) {
+              position -= interval;
+            } else {
+              position = 0;
+              clearInterval(animation);
+              this.context.onDemoCompleted();
+            }
+          }
+        }, 8);
+      }, 2000);
     }
   }
 
@@ -78,7 +107,7 @@ class QuizScreen extends React.Component {
               delay={main.delay}
               text={current.question} />
 
-            <ul ref={ref => this.list = ref}>
+            <ul ref="list">
               {
                 current.answers.map(answer => {
                   i++;
