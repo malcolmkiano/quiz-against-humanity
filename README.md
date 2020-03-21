@@ -1,3 +1,17 @@
+# Quiz Against Humanity
+😲 Test your knowledge in a quiz on facts that no _normal_ people would know about.<br />
+🚀 Live now at https://malcolmkiano.github.io/quiz-against-humanity<br />
+
+
+## Screenshots
+![mobile](https://malcolmkiano.com/img/quiz-against-humanity.jpg)
+
+
+## Contribute
+Have any cool questions you'd like to see on this quiz? Feel free to open up a pull request and add your questions into the `data.js` file in `/src/Modules`, and I'll review and get them merged ASAP! 🤩<br />
+
+-----------------------
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

@@ -1,0 +1,36 @@
+@import '../../App/colors'
+
+.btn
+  -webkit-appearance: none
+  border: none
+  background: $fg
+  color: $bg
+  font-family: inherit
+  font-size: inherit
+  font-weight: bold
+  padding: 1rem 2rem
+  width: 100%
+  border: .2em solid $fg
+  outline: none
+  cursor: pointer
+  border-radius: .3em
+  transition: all .2s ease
+
+  @media (hover: hover)
+    &:hover
+      background: $bg
+      color: $fg
+  
+  &.btn-small
+    width: auto
+  
+  &.btn-alt
+    background: $bg
+    color: $fg
+    border-color: $bg
+
+    @media (hover: hover)
+      &:hover
+        background: $fg
+        color: $bg
+        border-color: $bg

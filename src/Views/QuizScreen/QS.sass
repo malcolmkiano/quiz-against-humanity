@@ -1,0 +1,60 @@
+@import '../../App/colors'
+
+.quiz
+  background: $bg_alt
+  color: $bg
+  
+  header
+    display: flex
+    justify-content: space-between
+
+    & > div      
+      .number
+        font-size: 1.8rem
+        font-weight: 900
+
+        span
+          font-size: 0.7em
+
+      &:last-of-type
+        text-align: right
+  
+  ul
+    list-style: none
+    margin: 0 -2rem -2rem
+    padding: 0 2rem 2rem
+    white-space: nowrap
+    width: calc(100% + 4rem)
+    overflow-y: hidden
+    overflow-x: auto
+    font-size: 0.9rem
+    -webkit-overflow-scrolling: touch
+
+    li
+      margin-right: .75rem
+
+      button
+        -webkit-appearance: none
+        background: none
+        border: none
+        outline: none
+        font-weight: inherit
+        text-align: inherit
+      
+      &:last-of-type
+        margin-right: 0
+  
+  @media screen and (min-width: 812px)
+    article
+      justify-content: center
+      // margin-top: 2rem
+
+    ul
+      flex: .7
+      display: flex
+      justify-content: center
+      margin-bottom: 0
+      padding: 2rem 0
+
+      li
+        margin: 0 0.5rem

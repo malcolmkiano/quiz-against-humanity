@@ -1,0 +1,65 @@
+@import '../../App/colors'
+
+.card
+  display: inline-block
+  width: 11em
+  height: 15em
+  background: $fg
+  font-weight: bold
+  white-space: normal
+  border-radius: .4em
+  overflow: hidden
+  position: relative
+  cursor: pointer
+  border: 2px solid $fg
+  transition: all .2s ease
+
+  & > span, & > button
+    display: block
+    height: 100%
+    width: 100%
+    padding: 1em
+    cursor: inherit
+    position: relative
+
+    span
+      position: absolute
+      top: 0
+      left: 0
+      padding: inherit
+  
+  &::before
+    content: ""
+    position: absolute
+    bottom: 1.2rem
+    left: 1rem
+    font-size: 0.5em
+    width: .7em
+    height: 1em
+    background: $accent
+    border-radius: .1em
+    transform: rotate(-10deg)
+
+  &::after
+    content: "Quiz Against Humanity"
+    position: absolute
+    bottom: 1.2rem
+    left: calc(1rem + 1.2em)
+    font-size: .5em
+    user-select: none
+    pointer-events: none
+
+  &.card-question
+    margin: 0 auto
+    background: $bg
+    color: $fg
+    cursor: default
+    font-size: 1.1rem
+    border-color: $bg
+  
+  &:not(.card-question)
+    @media (hover: hover)
+      &:focus-within
+        border-color: $bg
+      &:hover
+        font-size: 1.05em
