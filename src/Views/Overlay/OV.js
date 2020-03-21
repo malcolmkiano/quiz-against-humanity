@@ -1,6 +1,7 @@
 import React from 'react';
 import './OV.sass';
 import DataContext from '../../Context/DataContext';
+import messages from '../../Modules/messages';
 
 import Button from '../../Components/Button/Button';
 
@@ -26,6 +27,18 @@ class Overlay extends React.Component {
 
   static contextType = DataContext;
 
+  componentDidMount() {
+    const {questions, questionNumber, selectedAnswer} = this.context;
+    const q = questions[questionNumber] || questions[questions.length - 1];
+    const correctAnswer = q.answers[q.correctAnswer];
+    const isCorrect = selectedAnswer === correctAnswer;
+
+    const msg = messages.random('remark', isCorrect);
+    this.setState({
+      remark: msg
+    });
+  }
+
   componentDidUpdate(props) {
     if (props.isVisible !== this.props.isVisible) {
       const show = this.props.isVisible;
@@ -47,14 +60,13 @@ class Overlay extends React.Component {
     const correctAnswer = q.answers[q.correctAnswer];
     const isCorrect = selectedAnswer === correctAnswer;
 
-    const title = isCorrect ? 'Good Job!' : 'Whoops!';
     const parts = q.question.split('_____');
     const body = (
       <>
         {parts[0]}<span className="correct">{correctAnswer.toLowerCase()}</span>{parts[1]}
       </>
     );
-    const message = (
+    const selection = (
       <>
         <br/><br/>
         You selected: <span className="wrong">{selectedAnswer}</span>
@@ -66,10 +78,10 @@ class Overlay extends React.Component {
         className={`overlay animated ${container.animation}`}>
         <article
           className={`animated ${content.animation}`}>
-          <h2>{title}</h2>
+          <h2>{this.state.remark}</h2>
           <p>
             {body}
-            {!isCorrect ? message : ''}
+            {!isCorrect ? selection : ''}
           </p>
           <Button type="btn-small btn-alt" onClick={this.handleClose}>
             {questionNumber < questions.length - 1 ? 'Next Question!' : 'See Results!'}

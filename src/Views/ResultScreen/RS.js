@@ -1,6 +1,7 @@
 import React from 'react';
 import './RS.sass';
 import DataContext from '../../Context/DataContext';
+import messages from '../../Modules/messages';
 
 import Header from '../../Components/Header/Header';
 import Button from '../../Components/Button/Button';
@@ -21,6 +22,11 @@ function animations(show) {
     content: {
       animation: show ? 'fadeIn' : 'fadeOut',
       delay: show ? 2 : 0
+    },
+
+    footer: {
+      animation: show ? 'fadeIn' : '',
+      delay: show ? 2 : 0
     }
   }
 }
@@ -34,6 +40,13 @@ class ResultScreen extends React.Component {
   }
 
   static contextType = DataContext;
+
+  componentDidMount() {
+    const msg = messages.random('result', this.context.score, this.context.questions.length);
+    this.setState({
+      result: msg
+    })
+  }
 
   componentDidUpdate(props) {
     if (props.isVisible !== this.props.isVisible) {
@@ -49,7 +62,8 @@ class ResultScreen extends React.Component {
   }
 
   render() {
-    const {container, header, content} = this.state;
+    const {container, header, content, footer} = this.state;
+    
     return (
       <section
         className={`results animated ${container.animation}`}
@@ -69,15 +83,15 @@ class ResultScreen extends React.Component {
                 {this.context.score}<span>/{this.context.questions.length}</span>
               </p>
               <p className="description">
-                This number is a direct representation of your intelligence. Take it as such.
+                {this.state.result}
               </p>
             </div>
             <Button onClick={this.handlePlayAgain}>Play Again!</Button>
           </article>
 
           <Footer
-            className={`animated ${content.animation}`}
-            style={{animationDelay: `${content.delay}s`}} />
+            className={`animated ${footer.animation}`}
+            style={{animationDelay: `${footer.delay}s`}} />
           
         </div>
       </section>

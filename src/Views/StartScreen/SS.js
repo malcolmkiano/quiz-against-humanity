@@ -19,6 +19,11 @@ function animations(show, startingOver=false) {
     content: {
       animation: show ? 'fadeIn' : 'fadeOut',
       delay: show ? 1 : 0
+    },
+
+    footer : {
+      animation: !startingOver ? show ? 'fadeIn' : 'fadeOut' : show ? '' : 'fadeOut',
+      delay: !startingOver ? show ? 1 : 0 : 0
     }
   }
 }
@@ -45,7 +50,7 @@ class StartScreen extends React.Component {
   }
 
   render() {
-    const {container, header, content} = this.state;
+    const {container, header, content, footer} = this.state;
     return (
       <section
         className={`intro animated ${container.animation}`}
@@ -65,8 +70,8 @@ class StartScreen extends React.Component {
           </article>
 
           <Footer
-            className={`animated ${content.animation}`}
-            style={{animationDelay: `${content.delay}s`}} />
+            className={`animated ${footer.animation}`}
+            style={{animationDelay: `${footer.delay}s`}} />
         </div>
       </section>
     )
