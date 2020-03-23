@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/quiz-against-humanity/precache-manifest.237bd33a1aba63d04798073c0895babc.js"
+  "/quiz-against-humanity/precache-manifest.6da94fac494fdf275aa40201a8fcb16c.js"
 );
 
 self.addEventListener('message', (event) => {
