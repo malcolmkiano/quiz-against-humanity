@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/quiz-against-humanity/static/css/main.fe5dbcf1.chunk.css",
-    "main.js": "/quiz-against-humanity/static/js/main.3fca07d9.chunk.js",
-    "main.js.map": "/quiz-against-humanity/static/js/main.3fca07d9.chunk.js.map",
+    "main.css": "/quiz-against-humanity/static/css/main.826abb9c.chunk.css",
+    "main.js": "/quiz-against-humanity/static/js/main.d833456e.chunk.js",
+    "main.js.map": "/quiz-against-humanity/static/js/main.d833456e.chunk.js.map",
     "runtime-main.js": "/quiz-against-humanity/static/js/runtime-main.e5a1e15d.js",
     "runtime-main.js.map": "/quiz-against-humanity/static/js/runtime-main.e5a1e15d.js.map",
     "static/js/2.f0cc232b.chunk.js": "/quiz-against-humanity/static/js/2.f0cc232b.chunk.js",
     "static/js/2.f0cc232b.chunk.js.map": "/quiz-against-humanity/static/js/2.f0cc232b.chunk.js.map",
     "index.html": "/quiz-against-humanity/index.html",
-    "precache-manifest.2773624be0f5094f51f972f9f038b28c.js": "/quiz-against-humanity/precache-manifest.2773624be0f5094f51f972f9f038b28c.js",
+    "precache-manifest.1a31f6c496456f27dd85d3e0808c3ee5.js": "/quiz-against-humanity/precache-manifest.1a31f6c496456f27dd85d3e0808c3ee5.js",
     "service-worker.js": "/quiz-against-humanity/service-worker.js",
-    "static/css/main.fe5dbcf1.chunk.css.map": "/quiz-against-humanity/static/css/main.fe5dbcf1.chunk.css.map",
+    "static/css/main.826abb9c.chunk.css.map": "/quiz-against-humanity/static/css/main.826abb9c.chunk.css.map",
     "static/js/2.f0cc232b.chunk.js.LICENSE.txt": "/quiz-against-humanity/static/js/2.f0cc232b.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.e5a1e15d.js",
     "static/js/2.f0cc232b.chunk.js",
-    "static/css/main.fe5dbcf1.chunk.css",
-    "static/js/main.3fca07d9.chunk.js"
+    "static/css/main.826abb9c.chunk.css",
+    "static/js/main.d833456e.chunk.js"
   ]
 }
