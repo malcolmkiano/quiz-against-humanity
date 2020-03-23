@@ -8,7 +8,7 @@
 
 
 ## Contribute
-Have any cool questions you'd like to see on this quiz? Feel free to open up a pull request and add your questions into the `data.js` file in `/src/Modules`, and I'll review and get them merged ASAP! 🤩<br />
+Have any cool questions you'd like to see on this quiz? Feel free to open up a pull request and add your questions into the `data.json` file in `/src`, and I'll review and get them put in ASAP! 🤩<br />
 
 -----------------------
 

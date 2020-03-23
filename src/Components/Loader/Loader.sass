@@ -1,0 +1,23 @@
+@import '../../App/colors'
+
+$color: rgba($fg_alt, .3)
+  
+.loader
+  position: absolute
+  bottom: 0
+  left: 0
+  right: 0
+  height: 0.3rem
+  background: $color
+  animation: fade 1s ease infinite
+  pointer-events: none
+  transition: all .5s ease
+
+  &.hidden
+    animation: fadeOut 1s ease forwards
+
+@keyframes fade
+  0%, 100%
+    background: $color
+  50%
+    background: rgba($color, .2)

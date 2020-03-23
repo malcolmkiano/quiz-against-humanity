@@ -6,10 +6,10 @@ const data = {
 
   result: {
     perfect: [
-      'You should be very proud of yourself. We aren\'t.',
+      'You should be very proud of yourself. Nobody else is.',
       'You must have been studying... weirdo.',
       'Congratu-fricking-lations, nerd.',
-      'Maybe now your parents will love you.'
+      'Maybe your parents will love you now.'
     ],
     good: [
       'You could\'ve done better... if you were smarter.',
@@ -21,7 +21,7 @@ const data = {
       'We\'re praying for your brain. We hope you find it someday.',
       'What\'s the opposite of high scores again?',
       'You tried so hard, but you still suck.',
-      'hmbvkjbkjxnjkdncjkdsnkcjndsjkvn.'
+      'That\'s a "yikes" from us.'
     ],
     terrible: [
       'People that actually live under rocks have got better scores.',
@@ -47,7 +47,7 @@ function random(type, ...rest) {
     let questions = rest[1];
     let total = score/questions;
 
-    keyword = total === 1 ? 'perfect' : total >= .7 ? 'good' : total >= .4 ? 'bad' : 'terrible';
+    keyword = total === 1 ? 'perfect' : total >= .7 ? 'good' : total > 0 ? 'bad' : 'terrible';
   }
 
   const node = data[type][keyword];

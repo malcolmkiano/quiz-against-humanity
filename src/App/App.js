@@ -2,9 +2,15 @@ import React from 'react';
 import './App.sass';
 import DataContext from '../Context/DataContext';
 
-import data from '../Modules/data';
 import animate from '../Modules/animate';
+import shuffle from '../Modules/shuffle';
 
+// contains firebase config
+import config from '../Modules/secrets';
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+
+// views
 import SS from '../Views/StartScreen/SS';
 import QS from '../Views/QuizScreen/QS';
 import OV from '../Views/Overlay/OV';
@@ -15,35 +21,40 @@ const QuizScreen = animate(QS);
 const Overlay = animate(OV);
 const ResultScreen = animate(RS);
 
-function shuffle(array) {
-  let array_copy = [...array];
-  for (let i = array_copy.length - 1; i > 0; i--) {
-    let j = Math.floor(Math.random() * (i + 1));
-    [array_copy[i], array_copy[j]] = [array_copy[j], array_copy[i]];
-  }
-  return array_copy;
-}
+let db;
 
 class App extends React.Component {
   constructor(){
     super();
+
+    firebase.initializeApp(config);
+    db = firebase.firestore();
+    db.enablePersistence();
+
     this.state = {
       quizStarted: false,
       questionNumber: 0,
       selectedAnswer: null,
       score: 0,
 
-      questions: shuffle(data),
+      questions: [],
 
-      demoCompleted: false,
+      demoCompleted: localStorage.getItem('demo') || false,
       startingOver: false,
+      loading: true,
       
-      appVersion: '1.0.0'
+      appVersion: '1.0.2'
     };
   }
 
   handleStart = () => {
-    this.setState({ quizStarted: true });
+    if (this.state.questions.length === 0){
+        this.getQuestions();
+        return false;
+    } else {
+      this.setState({ quizStarted: true });
+      return true;
+    }
   }
 
   handleAnswer = (answer) => {
@@ -61,7 +72,9 @@ class App extends React.Component {
   }
 
   handleDemoCompleted = () => {
-    this.setState({ demoCompleted: true })
+    this.setState({ demoCompleted: true }, () => {
+      localStorage.setItem('demo', true);
+    })
   }
 
   handleClose = () => {
@@ -79,10 +92,46 @@ class App extends React.Component {
       selectedAnswer: null,
       score: 0,
 
-      questions: shuffle(data),
+      questions: shuffle(this.state.questions),
 
       startingOver: true
     })
+  }
+
+  getQuestions() {
+    const questions = [];
+    db.collection('questions').get()
+      .then(snapshot => {
+        snapshot.docs.forEach(doc => {
+          questions[doc.id] = doc.data();
+          questions[doc.id].answers = [];
+          db.collection('answers').doc(doc.id).get()
+            .then(item => {
+              const answers = item.data();
+              Object.keys(answers).forEach(key => {
+                questions[doc.id].answers[key] = answers[key];
+              })
+            })
+        })
+      })
+      .then(() => {
+        this.setState({
+          questions: shuffle(questions),
+          loading: false
+        })
+
+        if (questions.length === 0) {
+          alert('Something went wrong. Please try again later.');
+        }
+
+      })
+      .catch(err => {
+        alert('Something went wrong. Please try again later.');
+      });
+  }
+
+  componentDidMount() {
+    this.getQuestions();    
   }
 
   render() {
@@ -92,7 +141,7 @@ class App extends React.Component {
       onDemoCompleted: this.handleDemoCompleted
     };
 
-    const {quizStarted, questionNumber, questions, selectedAnswer, startingOver} = this.state;
+    const {quizStarted, questionNumber, questions, selectedAnswer, startingOver, loading} = this.state;
 
     return (
       <>
@@ -101,6 +150,7 @@ class App extends React.Component {
           <StartScreen
             isVisible={!quizStarted}
             startingOver={startingOver}
+            isLoading={loading}
             onStart={this.handleStart} />
 
           <QuizScreen

@@ -4,6 +4,11 @@ import './SS.sass';
 import Header from '../../Components/Header/Header';
 import Button from '../../Components/Button/Button';
 import Footer from '../../Components/Footer/Footer';
+import Loader from '../../Components/Loader/Loader';
+
+import animate from '../../Modules/animate';
+
+const LoaderView = animate(Loader);
 
 function animations(show, startingOver=false) {
   return {
@@ -44,9 +49,11 @@ class StartScreen extends React.Component {
   }
 
   handleStart = () => {
-    this.setState({
-      ...animations(false)
-    }, this.props.onStart);
+    if (this.props.onStart()) {
+      this.setState({
+        ...animations(false)
+      });
+    }
   }
 
   render() {
@@ -55,7 +62,6 @@ class StartScreen extends React.Component {
       <section
         className={`intro animated ${container.animation}`}
         style={{animationDelay: `${container.delay}s`}}>
-
         <div className="wrapper">
           <Header
             className={`animated ${header.animation}`} />
@@ -72,6 +78,9 @@ class StartScreen extends React.Component {
           <Footer
             className={`animated ${footer.animation}`}
             style={{animationDelay: `${footer.delay}s`}} />
+
+          <LoaderView
+            isVisible={this.props.isLoading}/>
         </div>
       </section>
     )
