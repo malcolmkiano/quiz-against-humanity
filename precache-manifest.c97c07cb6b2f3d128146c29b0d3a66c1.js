@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "0f53b5e1da85323aea44d3e40d53c96a",
+    "revision": "75f213c2d6dff9944e25f4669891234b",
     "url": "/quiz-against-humanity/index.html"
   },
   {
-    "revision": "b6e46f223caa6599d2e5",
+    "revision": "b410b27ce8eb9e5032f2",
     "url": "/quiz-against-humanity/static/css/main.826abb9c.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/quiz-against-humanity/static/js/2.8a453735.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "b6e46f223caa6599d2e5",
-    "url": "/quiz-against-humanity/static/js/main.37d64e88.chunk.js"
+    "revision": "b410b27ce8eb9e5032f2",
+    "url": "/quiz-against-humanity/static/js/main.ff2c5234.chunk.js"
   },
   {
     "revision": "e7259eb60922acf35f45",
