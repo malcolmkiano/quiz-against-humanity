@@ -42,6 +42,7 @@ function random(type, ...rest) {
   if (type === 'remark') {
     let correct = rest[0];
     keyword = correct ? 'correct' : 'wrong';
+    
   } else {
     let score = rest[0];
     let questions = rest[1];
@@ -56,4 +57,4 @@ function random(type, ...rest) {
   return node[index];
 }
 
-export default { random };
+export default { random, data };

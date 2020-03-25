@@ -10,6 +10,11 @@ import animate from '../../Modules/animate';
 
 const LoaderView = animate(Loader);
 
+/**
+ * creates an object with corresponding entry/exit animations
+ * @param {Boolean} show true/false for entry/exit animations
+ * @param {Boolean} startingOver whether or not to skip container animations
+ */
 function animations(show, startingOver=false) {
   return {
     container: {
@@ -41,13 +46,7 @@ class StartScreen extends React.Component {
     }
   }
 
-  componentDidUpdate(props) {
-    if (props.isVisible !== this.props.isVisible) {
-      const show = props.isVisible;
-      return animations(show);
-    }
-  }
-
+  // run animations before dismount
   handleStart = () => {
     if (this.props.onStart()) {
       this.setState({

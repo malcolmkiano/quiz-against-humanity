@@ -5,10 +5,8 @@ import DataContext from '../Context/DataContext';
 import animate from '../Modules/animate';
 import shuffle from '../Modules/shuffle';
 
-// contains firebase config
-import config from '../Modules/secrets';
-import firebase from 'firebase/app';
-import 'firebase/firestore';
+// data is manually imported for now
+import data from '../data.json';
 
 // views
 import SS from '../Views/StartScreen/SS';
@@ -21,15 +19,9 @@ const QuizScreen = animate(QS);
 const Overlay = animate(OV);
 const ResultScreen = animate(RS);
 
-let db;
-
 class App extends React.Component {
   constructor(){
     super();
-
-    firebase.initializeApp(config);
-    db = firebase.firestore();
-    db.enablePersistence();
 
     this.state = {
       quizStarted: false,
@@ -37,26 +29,23 @@ class App extends React.Component {
       selectedAnswer: null,
       score: 0,
 
-      questions: [],
+      questions: shuffle(data),
 
       demoCompleted: localStorage.getItem('demo') || false,
       startingOver: false,
-      loading: true,
+      loading: false,
       
-      appVersion: '1.0.2'
+      appVersion: '1.0.1'
     };
   }
 
+  /** start the quiz if there are questions in the state */
   handleStart = () => {
-    if (this.state.questions.length === 0){
-        this.getQuestions();
-        return false;
-    } else {
-      this.setState({ quizStarted: true });
-      return true;
-    }
+    this.setState({ quizStarted: true });
+    return true;
   }
 
+  /** checks submitted answers against correct answer and updates state */
   handleAnswer = (answer) => {
     const {questions, questionNumber, score} = this.state;
     const q = questions[questionNumber];
@@ -71,12 +60,14 @@ class App extends React.Component {
     }
   }
 
+  /** runs when scroll demonstration is completed to prevent re-showing */
   handleDemoCompleted = () => {
     this.setState({ demoCompleted: true }, () => {
       localStorage.setItem('demo', true);
     })
   }
 
+  /** closes overlay component and moves to next question */
   handleClose = () => {
     const {questionNumber} = this.state;
     this.setState({
@@ -85,6 +76,7 @@ class App extends React.Component {
     });
   }
 
+  /** resets state values to restart quiz */
   handlePlayAgain = () => {
     this.setState({
       quizStarted: false,
@@ -92,55 +84,22 @@ class App extends React.Component {
       selectedAnswer: null,
       score: 0,
 
-      questions: shuffle(this.state.questions),
+      questions: shuffle(data),
 
       startingOver: true
     })
   }
 
-  getQuestions() {
-    const questions = [];
-    db.collection('questions').get()
-      .then(snapshot => {
-        snapshot.docs.forEach(doc => {
-          questions[doc.id] = doc.data();
-          questions[doc.id].answers = [];
-          db.collection('answers').doc(doc.id).get()
-            .then(item => {
-              const answers = item.data();
-              Object.keys(answers).forEach(key => {
-                questions[doc.id].answers[key] = answers[key];
-              })
-            })
-        })
-      })
-      .then(() => {
-        this.setState({
-          questions: shuffle(questions),
-          loading: false
-        })
-
-        if (questions.length === 0) {
-          alert('Something went wrong. Please try again later.');
-        }
-
-      })
-      .catch(err => {
-        alert('Something went wrong. Please try again later.');
-      });
-  }
-
-  componentDidMount() {
-    this.getQuestions();    
-  }
-
   render() {
+
+    // set up values and event handlers for context provider
     const contextValue = {
       ...this.state,
       onAnswer: this.handleAnswer,
       onDemoCompleted: this.handleDemoCompleted
     };
 
+    // grab necessary values from state
     const {quizStarted, questionNumber, questions, selectedAnswer, startingOver, loading} = this.state;
 
     return (

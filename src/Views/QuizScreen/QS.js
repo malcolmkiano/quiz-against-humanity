@@ -4,6 +4,11 @@ import DataContext from '../../Context/DataContext';
 
 import Card from '../../Components/Card/Card';
 
+/**
+ * creates an object with corresponding entry/exit animations
+ * @param {Boolean} show true/false for entry/exit animations
+ * @param {Boolean} ignoreContainer whether or not to skip container animations
+ */
 function animations(show, ignoreContainer=false) {
   return {
     container: {
@@ -34,6 +39,8 @@ class QuizScreen extends React.Component {
 
   static contextType = DataContext;
 
+  // enables question switching animation, or
+  // unmounting the component
   componentDidUpdate(props) {
     if (this.props.q > props.q) {
       this.setState({
@@ -51,6 +58,8 @@ class QuizScreen extends React.Component {
     }
   }
 
+  // demonstrates scrolling on mobile devices
+  // (this won't do anything if on PC since there will not be any overflow)
   componentDidMount() {
     if (!this.context.demoCompleted) {
       const list = this.refs.list;

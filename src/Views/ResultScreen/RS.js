@@ -7,6 +7,10 @@ import Header from '../../Components/Header/Header';
 import Button from '../../Components/Button/Button';
 import Footer from '../../Components/Footer/Footer';
 
+/**
+ * creates an object with corresponding entry/exit animations
+ * @param {Boolean} show true/false for entry/exit animations
+ */
 function animations(show) {
   return {
     container: {
@@ -41,6 +45,7 @@ class ResultScreen extends React.Component {
 
   static contextType = DataContext;
 
+  // set result message in state to avoid any changes
   componentDidMount() {
     const msg = messages.random('result', this.context.score, this.context.questions.length);
     this.setState({
@@ -48,13 +53,8 @@ class ResultScreen extends React.Component {
     })
   }
 
-  componentDidUpdate(props) {
-    if (props.isVisible !== this.props.isVisible) {
-      const show = props.isVisible;
-      return animations(show);
-    }
-  }
-
+  // run animations on click of Play Agin button
+  // before running prop event handler
   handlePlayAgain = () => {
     this.setState({
       ...animations(false),
